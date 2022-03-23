@@ -1,0 +1,7 @@
+@function ease($name) {
+  @return map-get($ease-map, $name);
+}
+
+@function rem($size) {
+  @return #{$size * 0.01}rem;
+}

@@ -1,0 +1,41 @@
+.u-sp {
+  display: none !important;
+
+  @include sp {
+    display: block !important;
+  }
+}
+
+.u-pc {
+  @include tb {
+    display: none !important;
+  }
+}
+
+.u-tb {
+  display: none !important;
+
+  @include tb {
+    display: block !important;
+  }
+}
+
+.u-sronly {
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+.u-nowrap {
+  white-space: nowrap;
+}
+
+.u-pc-nowrap {
+  white-space: nowrap;
+
+  @include sp {
+    white-space: normal;
+  }
+}

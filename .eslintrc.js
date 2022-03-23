@@ -4,12 +4,11 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: [
-    '@nuxtjs/eslint-config-typescript',
-    'plugin:nuxt/recommended',
-    'prettier',
-  ],
-  plugins: [],
+  extends: ['@nuxtjs/eslint-config-typescript', 'plugin:prettier/recommended', 'plugin:nuxt/recommended'],
+  plugins: ['vue'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'vue/no-v-html': 'off',
+    camelcase: ['off'],
+  },
 }

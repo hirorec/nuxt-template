@@ -1,0 +1,15 @@
+// ---------------
+// t-page
+// ---------------
+.t-page-enter,
+.t-page-leave-to {
+  opacity: 0;
+}
+
+.t-page-enter-active {
+  transition: opacity 0.5s linear;
+}
+
+.t-page-leave-active {
+  transition: opacity 0.5s linear;
+}

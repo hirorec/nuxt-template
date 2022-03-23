@@ -1,0 +1,67 @@
+%c-hover-opacity {
+  transition: opacity 0.1s linear;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+%c-hover-opacity-pc {
+  @include pc {
+    transition: opacity 0.15s linear;
+  }
+
+  @include tb {
+    transition: none;
+  }
+
+  &:hover {
+    @include pc {
+      opacity: 0.7;
+    }
+
+    @include tb {
+      opacity: 1;
+    }
+  }
+}
+
+%c-reset-button {
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+%c-reset-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+
+  option {
+    min-height: auto;
+    padding: 0;
+  }
+}
+
+%c-reset-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+%c-button-base {
+  @extend %c-hover-opacity-pc;
+
+  &:active {
+    filter: brightness(95%);
+  }
+}

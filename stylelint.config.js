@@ -1,11 +1,14 @@
 module.exports = {
   customSyntax: 'postcss-html',
-  extends: [
-    'stylelint-config-standard',
-    'stylelint-config-recommended-vue',
-    'stylelint-config-prettier',
+  plugins: [
+    'stylelint-prettier',
   ],
-  // add your custom config here
-  // https://stylelint.io/user-guide/configuration
-  rules: {},
-}
+  extends: [
+    'stylelint-prettier/recommended',
+    'stylelint-config-prettier',
+    'stylelint-config-property-sort-order-smacss'
+  ],
+  ignoreFiles: [
+    '**/node_modules/**',
+  ],
+};
