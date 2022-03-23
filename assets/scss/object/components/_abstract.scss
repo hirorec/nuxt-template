@@ -59,8 +59,6 @@
 }
 
 %c-button-base {
-  @extend %c-hover-opacity-pc;
-
   &:active {
     filter: brightness(95%);
   }

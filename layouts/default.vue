@@ -12,9 +12,8 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator'
-import { BASE_SIZE, BREAK_POINT, DEVICE_TYPE, PC_MIN_WIDTH, PC_MAX_WIDTH } from '~/constants'
-import { isSP, isPC, sleep } from '~/utils'
-import { appStore } from '~/store'
+import { BASE_SIZE, BREAK_POINT, PC_MIN_WIDTH, PC_MAX_WIDTH } from '~/constants'
+import { isPC, sleep } from '~/utils'
 import NuxtLogo from '~/components/NuxtLogo.vue'
 
 @Component({
@@ -28,34 +27,12 @@ export default class extends Vue {
   mainVisualVisible: boolean = false
   topVisualVisible: boolean = false
 
-  get vh100() {
-    return appStore.vh100
-  }
-
-  head() {
-    return {
-      bodyAttrs: {
-        class: appStore.bodyClass,
-      },
-    }
-  }
-
   mounted() {
     this.$vh100 = this.$refs.vh100
     this.handleWindowResize = this.handleWindowResize.bind(this)
     window.addEventListener('resize', this.handleWindowResize)
     this.updateHtmlFontSize()
-    this.updateVh100()
-    this.initDeviceType()
     this.show()
-  }
-
-  initDeviceType() {
-    if (isSP()) {
-      appStore.setDeviceType(DEVICE_TYPE.SP)
-    } else {
-      appStore.setDeviceType(DEVICE_TYPE.PC)
-    }
   }
 
   async show() {
@@ -85,37 +62,8 @@ export default class extends Vue {
     ;(document.documentElement as any).style['font-size'] = `${fontSize}px`
   }
 
-  updateVh100() {
-    const height = this.$vh100.clientHeight
-    appStore.setVh100(`${height}px`)
-    // console.log('updateVh100', height)
-  }
-
-  updateDeviceType() {
-    const currentDeviceType = appStore.deviceType
-
-    if (isSP()) {
-      if (currentDeviceType !== '' && currentDeviceType !== DEVICE_TYPE.SP) {
-        this.reload()
-      }
-
-      appStore.setDeviceType(DEVICE_TYPE.SP)
-    } else {
-      if (currentDeviceType !== '' && currentDeviceType !== DEVICE_TYPE.PC) {
-        this.reload()
-      }
-
-      appStore.setDeviceType(DEVICE_TYPE.PC)
-    }
-  }
-
   handleWindowResize() {
     this.updateHtmlFontSize()
-    this.updateDeviceType()
-
-    // if (isPC()) {
-    this.updateVh100()
-    // }
   }
 }
 </script>

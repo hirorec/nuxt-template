@@ -1,5 +1,4 @@
-import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
-import { BODY_CLASS } from '~/constants'
+import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 
 @Module({
   stateFactory: true,
@@ -7,36 +6,24 @@ import { BODY_CLASS } from '~/constants'
   name: 'app',
 })
 export default class extends VuexModule {
-  _vh100: string = '100vh'
-  deviceType: string = ''
-  isOverflow: boolean = false
+  _count: number = 0
 
-  get vh100(): string {
-    return this._vh100
-  }
-
-  get bodyClass(): string {
-    let className = ''
-
-    if (this.isOverflow) {
-      className = BODY_CLASS.OVERFLOW_HIDDEN
-    }
-
-    return className
+  get count(): number {
+    return this._count
   }
 
   @Mutation
-  setDeviceType(value: string) {
-    this.deviceType = value
+  setCount(value: number) {
+    this._count = value
   }
 
-  @Mutation
-  setVh100(value: string) {
-    this._vh100 = value
+  @Action
+  incrementCount(): void {
+    this.setCount(this._count + 1)
   }
 
-  @Mutation
-  setOverflow(value: boolean) {
-    this.isOverflow = value
+  @Action
+  decrementCount(): void {
+    this.setCount(this._count - 1)
   }
 }

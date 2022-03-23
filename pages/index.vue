@@ -1,17 +1,40 @@
 <template>
   <div class="page">
-    <h1 class="page__title">PAGE TITLE</h1>
+    <h1 class="page__title">COUNTER</h1>
+    <p class="page__count" :class="{ 'is-minus': isMinus }">{{ count }}</p>
+    <div class="page__ui">
+      <PrimaryButton @click="handleClickMinus">−</PrimaryButton>
+      <PrimaryButton @click="handleClickPlus">＋</PrimaryButton>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, namespace } from 'nuxt-property-decorator'
+import { appStore } from '~/store'
+import PrimaryButton from '~/components/PrimaryButton.vue'
 
-@Component
+const App = namespace('app')
+
+@Component({
+  components: {
+    PrimaryButton,
+  }
+})
 export default class extends Vue {
-  // handleClickEnter() {
-  //   this.$router.push('/q/1')
-  // }
+  @App.Getter count!: number
+
+  get isMinus() {
+    return this.count < 0
+  }
+
+  handleClickPlus() {
+    appStore.incrementCount()
+  }
+
+  handleClickMinus() {
+    appStore.decrementCount()
+  }
 }
 </script>
 
@@ -21,8 +44,10 @@ export default class extends Vue {
   position: fixed;
   top: 0;
   left: 0;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px 0;
   width: 100%;
   height: 100%;
 }
@@ -30,5 +55,21 @@ export default class extends Vue {
 .page__title {
   font-size: rem(40);
   font-weight: bold;
+}
+
+.page__count {
+  padding: 30px;
+  background-color: #fff;
+  font-weight: bold;
+
+  &.is-minus {
+    background-color: red;
+    color: #fff;
+  }
+}
+
+.page__ui {
+  display: flex;
+  gap: 20px;
 }
 </style>
